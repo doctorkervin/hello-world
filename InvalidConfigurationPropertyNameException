@@ -1,0 +1,8 @@
+yml 配置文件：
+configuration:
+  foodProperties:
+    name: MilkTea
+    
+经测试，得出与配置文件关联的prefix不支持驼峰命名和蛇形命名（下划线）。
+
+将Component类和配置文件中的foodProperties改为food，即可解决该错误。
