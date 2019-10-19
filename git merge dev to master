@@ -1,0 +1,20 @@
+## 查看分支列表
+$ git branch -a
+
+## 切换到本地dev分支
+$ git checkout dev 
+
+## 更新本地dev 分支
+$ git pull
+
+## 切换到master 分支
+$ git check master
+
+## 更新 本地master 分支
+$ git  pull
+
+## 合并本地 dev 到 本地master
+$ git merge dev 
+
+## 将本地mater 推到远程master
+$ git push
