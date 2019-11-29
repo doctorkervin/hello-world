@@ -29,7 +29,6 @@ spring:
       #数据库空闲链接
       minimum-idle: 0
     url: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&useSSL=false
-    #url: jdbc:log4jdbc:mysql://localhost:3306/lybank?useUnicode=true&characterEncoding=utf-8&useSSL=false
     username: root
     password: 123456
   jpa:
@@ -40,8 +39,6 @@ spring:
     open-in-view: true
     properties:
       hibernate:
-        cache:
-          use_second_level_cache: true
         dialect: org.hibernate.dialect.MySQL5InnoDBDialect
         enable_lazy_load_no_trans: false
       javax:
