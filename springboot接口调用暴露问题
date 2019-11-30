@@ -1,0 +1,16 @@
+
+ springboot项目pom文件修改前使用了spring-boot-starter-data-rest
+ 虽然做了白名单限制,但是接口ip与url地址还是暴露了
+
+ 后来将这个jar的应用屏蔽掉了,引用了web的jar就好了
+
+
+
+ <!--<dependency>-->
+    <!--<groupId>org.springframework.boot</groupId>-->
+    <!--<artifactId>spring-boot-starter-data-rest</artifactId>-->
+<!--</dependency>-->
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-web</artifactId>
+</dependency>
