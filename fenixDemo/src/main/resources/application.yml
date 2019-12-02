@@ -51,7 +51,7 @@ spring:
   #thymeleaf:
     #cache: false
     #prefix: classpath:/templates/
-fenix:
-  print-banner: true
-  xml-locations: fenix
+#fenix:
+  #print-banner: true
+  #xml-locations: fenix
 debug: true

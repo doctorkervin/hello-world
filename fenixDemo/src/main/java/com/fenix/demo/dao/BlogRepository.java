@@ -2,11 +2,13 @@ package com.fenix.demo.dao;
 
 import com.blinkfox.fenix.jpa.QueryFenix;
 import com.fenix.demo.entity.Blog;
+import com.fenix.demo.provider.SqlProvider;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.query.Param;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -18,15 +20,25 @@ public interface BlogRepository extends JpaRepository<Blog, String> {
 
 
     /**
-     * 使用 {@link QueryFenix} 注解来演示根据散参数、博客信息Bean(可以是其它Bean 或者 Map)来多条件模糊分页查询博客信息.
+     * 使用 {@link QueryFenix} 注解和 Java API 来拼接 SQL 的方式来查询博客信息.
      *
-     * @param ids 博客信息 ID 集合
-     * @param blog 博客信息实体类，可以是其它 Bean 或者 Map.
-     * @param pageable JPA 分页排序参数
-     * @return 博客分页信息
+     * @param blog 博客信息实体
+     * @param startTime 开始时间
+     * @param endTime 结束时间
+     * @param blogIds 博客 ID 集合
+     * @return 用户信息集合
      */
-    @QueryFenix
-    Page<Blog> queryMyBlogs(@Param("ids") List<String> ids, @Param("blog") Blog blog, Pageable pageable);
-
+    @QueryFenix(provider = SqlProvider.class, method = "queryBlogsWithJava")
+    List<Blog> queryBlogsWithJava(@Param("blog") Blog blog, @Param("startTime") Date startTime,
+                                  @Param("endTime") Date endTime, @Param("blogIds") String[] blogIds);
+    /**
+     * @Titel
+     * @Description 联合查询
+     * @Author  Kervin
+     * @DateTime 2019/12/2 14:16
+     * @return
+     */
+    @QueryFenix(provider = SqlProvider.class, method = "queryBlogsUnionUser")
+    List<Object> queryBlogsUnionUser(@Param("blogId") String blogId);
 
 }
