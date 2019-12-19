@@ -1,0 +1,5 @@
+cat -n test.log |tail -n +92|head -n 20
+
+tail -n +92表示查询92行之后的日志
+
+head -n 20 则表示在前面的查询结果里再查前20条记录
