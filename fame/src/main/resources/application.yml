@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    connection-test-query: '"SELECT 1"'
+    driver-class-name: com.mysql.jdbc.Driver
+#    driver-class-name: net.sf.log4jdbc.DriverSpy
+    url: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=GMT%2B8
+    username: root
+    password: 123456
+  jpa:
+    hibernate.ddl-auto: update
+    generate-ddl: true
+    show-sql: true
+server:
+  port: 8080
