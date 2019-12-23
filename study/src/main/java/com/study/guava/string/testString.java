@@ -28,6 +28,7 @@ public class testString {
     }
 
     //将Map转为String 22ms
+    //注意map里面的key对应的值不能为null，否则Joiner会报空指针异常
     @Test
     public void mapToString() {
         HashMap<String, String> map = Maps.newHashMap();
