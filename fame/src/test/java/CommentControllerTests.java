@@ -1,4 +1,6 @@
 import com.fame.LockAndTransactionApplication;
+import com.fame.dao.CommentRepository;
+import com.fame.entity.Comment;
 import com.fame.service.CommentService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,7 +26,7 @@ public class CommentControllerTests {
 
    /* @LocalServerPort
     int randomServerPort;*/
-    @Test
+    //@Test
     public void concurrentComment() {
         String url = "http://localhost:8080/comment";
         for (int i = 0; i < 100; i++) {
@@ -38,5 +40,16 @@ public class CommentControllerTests {
             }).start();
         }
 
+    }
+
+    @Autowired
+    private com.fame.dao.CommentRepository commentRepository;
+
+    @Test
+    public void test01(){
+        /** Jpa 的deleteById 关联的数据库执行了两条sql，先通过id，将这条记录查出来，然后删除这条记录*/
+        //commentRepository.deleteById(1L);
+        /** 使用原生的sql，只执行一条sql语句 delet from*/
+        commentRepository.deleteInBulkById(2L);
     }
 }
