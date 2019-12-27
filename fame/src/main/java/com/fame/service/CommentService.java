@@ -1,9 +1,12 @@
 package com.fame.service;
 
+import com.fame.dblock.annotation.RetryOnFailure;
+import com.fame.common.ApiResultEnum;
 import com.fame.dao.ArticleRepository;
 import com.fame.dao.CommentRepository;
 import com.fame.entity.Article;
 import com.fame.entity.Comment;
+import com.fame.exception.TryAgainException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,7 +29,8 @@ public class CommentService {
     @Autowired
     private CommentRepository commentRepository;
 
-    @Transactional
+    @RetryOnFailure
+    @Transactional(rollbackFor = Exception.class)
     public void postComment(Long articleId, String content) {
         //Optional<Article> articleOptional = articleRepository.findById(articleId);
         //Optional<Article> articleOptional = articleRepository.findArticleForUpdate(articleId);
@@ -44,7 +48,8 @@ public class CommentService {
 
         int count = articleRepository.updateArticleWithVersion(article.getId(), article.getCommentCount() + 1, article.getVersion());
         if (count == 0) {
-            throw new RuntimeException("服务器繁忙,更新数据失败");
+            //如果更新失败就抛出去，重试
+            throw new TryAgainException(ApiResultEnum.ERROR_TRY_AGAIN);
         }
     }
 }
