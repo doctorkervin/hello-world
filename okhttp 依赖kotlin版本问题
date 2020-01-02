@@ -1,0 +1,20 @@
+异常：
+
+java.lang.NoSuchMethodError: No static method copyInto$default([Ljava/lang/Object;[Ljava/lang/Object;IIIILjava/lang/Object;)[Ljava/lang/Object; in class Lkotlin/collections/ArraysKt; or its super classes (declaration of 'kotlin.collections.ArraysKt' appears in /data/app/com.example.debug-1/base.apk)
+FATAL EXCEPTION: pool-6-thread-1
+Process: com.example.debug, PID: 6606
+java.lang.NoSuchMethodError: No static method copyInto$default([Ljava/lang/Object;[Ljava/lang/Object;IIIILjava/lang/Object;)[Ljava/lang/Object; in class Lkotlin/collections/ArraysKt; or its super classes (declaration of 'kotlin.collections.ArraysKt' appears in /data/app/com.example.debug-1/base.apk)
+    at okhttp3.tls.internal.TlsUtil.newKeyManager(TlsUtil.kt:84)
+    at okhttp3.tls.HandshakeCertificates$Builder.build(HandshakeCertificates.kt:144)
+    at io.appflate.restmock.SslUtils.localhost(SslUtils.java:49)
+    at io.appflate.restmock.RESTMockServer.setUpHttps(RESTMockServer.java:91)
+    at io.appflate.restmock.RESTMockServer.init(RESTMockServer.java:74)
+    at io.appflate.restmock.RESTMockServerStarter$1.run(RESTMockServerStarter.java:56)
+    at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1133)
+    
+    
+
+i fixed this exception by import the okhttp jar 4.2.0
+okhttp and okhttp-tls depend on 1.3.50,
+so something else must have been pinning it back to an old version.
+mvn repository.com/artifact/com.squareup.okhttp3/okhttp/4.2.0 
