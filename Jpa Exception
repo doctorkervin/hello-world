@@ -1,0 +1,13 @@
+Use:
+
+SHOW OPEN TABLES
+An check whether the column In_use is greater than 0. In that case, the table is locked.
+
+Examples
+List of locked tables:
+
+show open tables WHERE In_use > 0
+
+Check whether the table tb_employees is locked or not:
+
+show open tables WHERE Table LIKE 'tb_employees' AND In_use > 0
