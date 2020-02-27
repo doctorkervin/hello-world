@@ -1,33 +1,39 @@
 package string.one;
 
-import org.junit.Test;
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 /**
  * 字符串的反转
  */
-public class TheInversionOfString {
+public class TheInversionOfString<T> {
 
-    public void reverseString(char[] s) {
+    /**
+     * 数组反转
+     * @param s
+     */
+    public void reverse(T[] s) {
         for (int l = 0, r = s.length - 1; l < r; l++, r--) {
-            char temp = s[l];
+            T temp = s[l];
             s[l] = s[r];
             s[r] = temp;
         }
     }
 
-    @Test
-    public void test(){
-        String temp = "123sdasffgv";
-        char[] arr = temp.toCharArray();
-        reverseString(arr);
-        System.out.println(arr.toString());
+    /**
+     * 输入一个英文句子，翻转文中单词的顺序
+     */
+    public static void main(String[] args) {
+        String test = "I am a Student ";
+        String[] arr = test.split(" ");
+        TheInversionOfString<String> temp = new TheInversionOfString<>();
+        temp.reverse(arr);
+        String collect = Arrays.asList(arr).stream().collect(Collectors.joining(" "));
+        System.out.println(collect);
     }
 
-    public static void main(String[] args) {
-        TheInversionOfString temp1 = new TheInversionOfString();
-        String temp = "123sdasffgv";
-        char[] arr = temp.toCharArray();
-        temp1.reverseString(arr);
-        System.out.println(arr.toString());
-    }
+
+
+    
+    
 }
