@@ -79,6 +79,7 @@ public class TheContainsOfString {
      * @param str2
      * @return
      * 时间复杂度  n*log(n) 主要来自于数组排序
+     * Time Complexity n*log(n)
      */
     boolean stringIsBrother2(String str1 , String str2) {
         boolean flag = true;
