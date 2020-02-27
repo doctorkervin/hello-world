@@ -1,5 +1,7 @@
 package string.two;
 
+import java.util.Arrays;
+
 /**
  * 字符串的包含
  */
@@ -71,9 +73,37 @@ public class TheContainsOfString {
         return true;
     }
 
+    /**
+     * 判断字符串str1是str2的兄弟字符串的第二中方法
+     * @param str1
+     * @param str2
+     * @return
+     * 时间复杂度  n*log(n) 主要来自于数组排序
+     */
+    boolean stringIsBrother2(String str1 , String str2) {
+        boolean flag = true;
+        if (str1.length() != str2.length()){
+            flag = false;
+        }else {
+            char[] arr1 = str1.toCharArray();
+            Arrays.sort(arr1);
+            char[] arr2 = str2.toCharArray();
+            Arrays.sort(arr2);
+            for (int i = 0; i < arr1.length; i++) {
+                if (arr1[i] == arr2[i]){
+                    continue;
+                }else {
+                    flag = false;
+                    break;
+                }
+            }
+        }
+        return flag;
+    }
+
     public static void main(String[] args) {
         TheContainsOfString temp = new TheContainsOfString();
-        boolean b = temp.stringIsBrother("abcc", "bcca");
+        boolean b = temp.stringIsBrother2("abcc", "bcc2");
         System.out.println(b);
     }
 }
