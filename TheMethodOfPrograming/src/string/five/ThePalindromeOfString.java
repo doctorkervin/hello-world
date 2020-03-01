@@ -1,4 +1,7 @@
 package string.five;
+
+import java.util.LinkedList;
+
 /**
  * 字符串中的回文
  */
@@ -21,6 +24,19 @@ public class ThePalindromeOfString {
         return true;
     }
 
+
+    /**
+     * 链表回文
+     * 双向链表
+     */
+    boolean theLinkedListIsPalindrome(LinkedList<Character> list){
+        int size = list.size();
+        //处理like字符串数组一样
+        //具体应该获取该链表的首节点和尾节点，
+        //先判断首节点和尾节点的元素是否相同
+        //相同则首节点获取后个节点，尾节点获取前节点，继续判断是否相同
+        return true;
+    }
     public static void main(String[] args) {
         ThePalindromeOfString temp = new ThePalindromeOfString();
         boolean madam = temp.theStringIsPalindrome("123456543210");
