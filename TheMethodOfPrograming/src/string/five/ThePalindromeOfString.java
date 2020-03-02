@@ -37,6 +37,65 @@ public class ThePalindromeOfString {
         //相同则首节点获取后个节点，尾节点获取前节点，继续判断是否相同
         return true;
     }
+
+    /**
+     * 给定一个字符串，求他最长回文子串的长度
+     * @param str
+     * @return
+     */
+    String theLongestPalindromeOfString(String str){
+        return "";
+    }
+
+    /**
+     * manacher算法
+     * @param str
+     * @return
+     * 例如String "abdfdg"
+     * manacher "$a$b$d$f$d$g"
+     */
+    public char[] manacherString(String str){
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < str.length(); i++) {
+            sb.append("#");
+            sb.append(str.charAt(i));
+        }
+        sb.append("#");
+        return sb.toString().toCharArray();
+    }
+
+    /**
+     * 最大回文长度
+     * @param str
+     * @return int
+     */
+    public int manacher(String str){
+        if(str == null || str.length() < 1){
+            return 0;
+        }
+        char[] charArr = manacherString(str);
+        int[] radius = new int[charArr.length];
+        int R = -1;
+        int c = -1;
+        int max = Integer.MIN_VALUE;
+        for (int i = 0; i < radius.length; i++) {
+            radius[i] = R > i ? Math.min(radius[2*c-i],R-i+1):1;
+            while(i+radius[i] < charArr.length && i - radius[i] > -1){
+                if(charArr[i-radius[i]] == charArr[i+radius[i]]){
+                    radius[i]++;
+                }else{
+                    break;
+                }
+            }
+            if(i + radius[i] > R){
+                R = i + radius[i]-1;
+                c = i;
+            }
+            max = Math.max(max,radius[i]);
+        }
+        return max-1;
+    }
+
     public static void main(String[] args) {
         ThePalindromeOfString temp = new ThePalindromeOfString();
         boolean madam = temp.theStringIsPalindrome("123456543210");
