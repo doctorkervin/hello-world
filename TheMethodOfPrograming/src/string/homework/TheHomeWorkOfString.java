@@ -1,5 +1,8 @@
 package string.homework;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * @author: doctor kervin
  * @date: 2020-02-27 22:09
@@ -50,8 +53,17 @@ public class TheHomeWorkOfString {
 
     /**
      * 字符个数的统计
+     * 给定一个字符串，统计各个字符串的个数，区分大小写，时间复杂度为O(n)
      * O(n)
      */
+    private Map<Character,Integer> countEachCharacterOfString(String str){
+       Map<Character, Integer> map = new HashMap<>();
+        char[] chars = str.toCharArray();
+        for (int i = 0; i < chars.length; i++) {
+            map.put(chars[i],map.get(chars[i])+1);
+        }
+        return map;
+    }
 
     /**
      * 字符串的匹配
