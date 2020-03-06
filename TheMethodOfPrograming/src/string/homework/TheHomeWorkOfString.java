@@ -1,7 +1,6 @@
 package string.homework;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author: doctor kervin
@@ -75,4 +74,54 @@ public class TheHomeWorkOfString {
      * 字符串空格的压缩
      */
 
+    /**
+     * 使用lambda表达式进行转换，排序，和限定输出
+     *
+     */
+    private List<String> perform(){
+        List<PlaceOrder> list = new ArrayList<>();
+        PlaceOrder placeOrder1 = new PlaceOrder();
+        PlaceOrder placeOrder2 = new PlaceOrder();
+        placeOrder1.setOrderNo("12132312312312");
+        placeOrder1.setOrderTime(new Date());
+        placeOrder2.setOrderNo("343434332342433");
+        list.add(placeOrder1);
+        Date date = new Date(2020, 3, 6);
+        placeOrder2.setOrderTime(date);
+        list.add(placeOrder2);
+        list.stream().sorted(new Comparator<PlaceOrder>() {
+            @Override
+            public int compare(PlaceOrder o1, PlaceOrder o2) {
+                return o2.getOrderTime().compareTo(o1.getOrderTime());
+            }
+        }).map(placeOrder -> placeOrder.getOrderNo()).limit(1).forEach(System.out::println);
+        return null;
+
+    }
+    static class PlaceOrder{
+        private Date orderTime;
+        private String orderNo;
+
+        public Date getOrderTime() {
+            return orderTime;
+        }
+
+        public void setOrderTime(Date orderTime) {
+            this.orderTime = orderTime;
+        }
+
+        public String getOrderNo() {
+            return orderNo;
+        }
+
+        public void setOrderNo(String orderNo) {
+            this.orderNo = orderNo;
+        }
+    }
+
+    public static void main(String[] args) {
+        TheHomeWorkOfString th = new TheHomeWorkOfString();
+        th.perform();
+    }
 }
+
