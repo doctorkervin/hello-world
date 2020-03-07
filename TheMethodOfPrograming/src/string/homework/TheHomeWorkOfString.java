@@ -72,7 +72,22 @@ public class TheHomeWorkOfString {
 
     /**
      * 字符串空格的压缩
+     * 字符串多个空格压缩成一个，并按照每个空格分的str，倒序排列
      */
+    private String work01(String str){
+        String[] arr = str.split("\\s+");
+        StringBuffer sb = new StringBuffer();
+        if (arr.length == 1){
+            return revertOfString(arr[0]);
+        }
+        for (int i = 0; i < arr.length; i++) {
+            sb.append(revertOfString(arr[i]));
+            if (i != arr.length -1){
+                sb.append(" ");
+            }
+        }
+        return sb.toString();
+    }
 
     /**
      * 使用lambda表达式进行转换，排序，和限定输出
