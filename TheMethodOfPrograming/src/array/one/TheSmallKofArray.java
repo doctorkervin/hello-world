@@ -1,5 +1,8 @@
 package array.one;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 /**
  * @author: doctor kervin
  * @date: 2020-03-08 23:35
@@ -40,5 +43,23 @@ public class TheSmallKofArray {
      */
     private static void method01() {
 
+    }
+
+    /**
+     * 排序
+     * @param input
+     * @param k
+     * @return
+     */
+    public ArrayList<Integer> GetLeastNumbers_Solution(int[] input, int k) {
+        ArrayList<Integer> al = new ArrayList<>();
+        if(input.length <= 0 || input == null || k <= 0 || k > input.length){
+            return al;
+        }
+        Arrays.sort(input);
+        for(int i = 0; i < k; i++){
+            al.add(input[i]);
+        }
+        return al;
     }
 }
