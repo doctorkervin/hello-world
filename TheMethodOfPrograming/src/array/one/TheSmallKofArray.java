@@ -227,3 +227,133 @@ class BubbleSortNormal {
         return arr;
     }
 }
+
+/**
+ * 桶排序
+ */
+    class BucketSort {
+
+    private static final InsertSort insertSort = new InsertSort();
+
+    public int[] sort(int[] sourceArray) throws Exception {
+        // 对 arr 进行拷贝，不改变参数内容
+        int[] arr = Arrays.copyOf(sourceArray, sourceArray.length);
+
+        return bucketSort(arr, 5);
+    }
+
+    private int[] bucketSort(int[] arr, int bucketSize) throws Exception {
+        if (arr.length == 0) {
+            return arr;
+        }
+
+        int minValue = arr[0];
+        int maxValue = arr[0];
+        for (int value : arr) {
+            if (value < minValue) {
+                minValue = value;
+            } else if (value > maxValue) {
+                maxValue = value;
+            }
+        }
+
+        int bucketCount = (int) Math.floor((maxValue - minValue) / bucketSize) + 1;
+        int[][] buckets = new int[bucketCount][0];
+
+        // 利用映射函数将数据分配到各个桶中
+        for (int i = 0; i < arr.length; i++) {
+            int index = (int) Math.floor((arr[i] - minValue) / bucketSize);
+            buckets[index] = arrAppend(buckets[index], arr[i]);
+        }
+
+        int arrIndex = 0;
+        for (int[] bucket : buckets) {
+            if (bucket.length <= 0) {
+                continue;
+            }
+            // 对每个桶进行排序，这里使用了插入排序
+            bucket = insertSort.sort(bucket);
+            for (int value : bucket) {
+                arr[arrIndex++] = value;
+            }
+        }
+
+        return arr;
+    }
+
+    /**
+     * 自动扩容，并保存数据
+     *
+     * @param arr
+     * @param value
+     */
+    private int[] arrAppend(int[] arr, int value) {
+        arr = Arrays.copyOf(arr, arr.length + 1);
+        arr[arr.length - 1] = value;
+        return arr;
+    }
+
+}
+
+/**
+ * 插入排序
+ */
+    class InsertSort {
+
+    public int[] sort(int[] sourceArray) throws Exception {
+        // 对 arr 进行拷贝，不改变参数内容
+        int[] arr = Arrays.copyOf(sourceArray, sourceArray.length);
+
+        // 从下标为1的元素开始选择合适的位置插入，因为下标为0的只有一个元素，默认是有序的
+        for (int i = 1; i < arr.length; i++) {
+
+            // 记录要插入的数据
+            int tmp = arr[i];
+
+            // 从已经排序的序列最右边的开始比较，找到比其小的数
+            int j = i;
+            while (j > 0 && tmp < arr[j - 1]) {
+                arr[j] = arr[j - 1];
+                j--;
+            }
+
+            // 存在比其小的数，插入
+            if (j != i) {
+                arr[j] = tmp;
+            }
+
+        }
+        return arr;
+    }
+}
+
+/**
+ * 希尔排序
+ */
+    class ShellSort {
+
+    public int[] sort(int[] sourceArray) throws Exception {
+        // 对 arr 进行拷贝，不改变参数内容
+        int[] arr = Arrays.copyOf(sourceArray, sourceArray.length);
+
+        int gap = 1;
+        while (gap < arr.length) {
+            gap = gap * 3 + 1;
+        }
+
+        while (gap > 0) {
+            for (int i = gap; i < arr.length; i++) {
+                int tmp = arr[i];
+                int j = i - gap;
+                while (j >= 0 && arr[j] > tmp) {
+                    arr[j + gap] = arr[j];
+                    j -= gap;
+                }
+                arr[j + gap] = tmp;
+            }
+            gap = (int) Math.floor(gap / 3);
+        }
+
+        return arr;
+    }
+}
