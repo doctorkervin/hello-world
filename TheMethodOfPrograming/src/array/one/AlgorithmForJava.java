@@ -18,6 +18,8 @@ class SplitAndMerge {
     static void Merge(int a[], int left, int middle, int rigth) {
         //定义左端数组大小
         int n1 = middle - left + 1;
+
+
         int n2 = rigth - middle;
 
         //初始化数组，分配内存
