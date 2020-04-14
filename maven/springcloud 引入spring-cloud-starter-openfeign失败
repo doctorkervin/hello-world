@@ -1,0 +1,46 @@
+引入下面jar包总是报错：jar包丢失
+
+<dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+ </dependency>
+
+版本信息如下：
+
+<parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.0.2.RELEASE</version>
+    </parent>
+
+ 
+
+<dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>Finchley.M7</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+ 
+
+解决办法：
+
+进入项目所在的本地目录
+
+cd 项目目录
+
+执行下面命令：
+
+mvn clean install -U
+
+如果没有看到报错信息，
+
+在开发工具中选中项目点击右键：选择maven ----->update---
+
+更新项目即可
